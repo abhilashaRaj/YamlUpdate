@@ -1,0 +1,32 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: yaml_update_poc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yaml_update_poc
+  template:
+    metadata:
+      labels:
+        app: yaml_update_poc 
+    spec:
+      containers:
+        - name: yaml_update_poc 
+          image: wblnd.azurecr.io/yaml_update_poc:__TAG__
+          ports:
+          - containerPort: 8080
+--- 
+
+  
+apiVersion: v1
+kind: Service
+metadata:
+    name: yaml_update_poc
+spec:
+    type: LoadBalancer
+    ports:
+    - port: 8080
+    selector:
+        app: yaml_update_poc
