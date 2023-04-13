@@ -1,8 +1,11 @@
 package com.example.demo;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
+import org.yaml.snakeyaml.Yaml;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,14 +36,34 @@ public class Controller {
 		return createYamlFile.yaml();
 		//return createYamlFile.yaml();
 	}
-
 	
+
+	/**
+	 * 
+	 * @param filePath
+	 * @return
+	 */
+	 @GetMapping("/read-yaml")
+	    public Map<String, Object> readYamlFile(@RequestParam("path") String filePath) {
+	        Map<String, Object> yamlData = null;
+	        try {
+	            // Load YAML file from given path
+	            Yaml yaml = new Yaml();
+	            yamlData = yaml.load(new FileInputStream(filePath));
+	        } catch (FileNotFoundException e) {
+	            // Handle file not found exception
+	            e.printStackTrace();
+	        }
+	        return yamlData;
+	    }
 	/**
 	 * @apiNote Converts a JSON and creates a YAML file
 	 * @param json
 	 * @param file
 	 * @return
 	 */
+	
+	
 	@PostMapping(value = "/update")
 	public ResponseEntity<String> updateToYaml(@RequestBody String json, @RequestParam String file) 
 	{

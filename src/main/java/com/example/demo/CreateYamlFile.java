@@ -13,7 +13,7 @@ public class CreateYamlFile {
 
 	public Map<String, Object> yaml() throws IOException {
 		//read
-		InputStream inputStream = new FileInputStream(new File("D:\\ITM JAVA\\itm_java_dev\\testSnakeYaml\\src\\main\\resources\\example.yaml"));
+		InputStream inputStream = new FileInputStream(new File("D:\\ITM JAVA\\itm_java_dev\\yaml_update_poc\\src\\main\\resources\\example.yaml"));
 
 		Yaml yaml = new Yaml();
 		Map<String, Object> data = yaml.load(inputStream);
