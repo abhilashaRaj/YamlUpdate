@@ -1,4 +1,12 @@
 ---
-name: "Aman"
-age: 12
-city: "Delhi"
+applications:
+- name: "cherryworkproducts-messaging-dev"
+  memory: "1024M"
+  random-route: false
+  docker:
+    image: "wblnd.azurecr.io/messaging-java-dev:__TAG__"
+    username: "wblnd"
+  env:
+    SPRING_APPLICATION_JSON: "{\"spring.application.name\":\"messaging-java-dev-btp\"\
+      ,\"spring.config.import\":\"optional:configserver:https://cherryworkproducts-config-server.cfapps.eu10.hana.ondemand.com\"\
+      ,\"spring.profiles.active\":\"SAP_security,SAP_swagger,local_bean_config\"}"
